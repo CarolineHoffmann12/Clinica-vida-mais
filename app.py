@@ -11,7 +11,8 @@ while True:
     print("2. Ver estatísticas")
     print("3. Buscar paciente")
     print("4. Listar todos os pacientes")
-    print("5. Sair")
+    print("5. Verificar atendimento")
+    print("6. Sair")
     print("=" * 40)
 
     opcao = input("Escolha uma opção: ")
@@ -188,12 +189,95 @@ while True:
 
 
     # ==========================================
-    # OPÇÃO 5 - SAIR
+    # OPÇÃO 5 - VERIFICAR ATENDIMENTO
     # ==========================================
 
     elif opcao == "5":
 
-        print("\nObrigado por utilizar o sistema Clínica Vida+!")
+        print("\n--- VERIFICAR ATENDIMENTO ---")
+
+        agendamento = input(
+            "Paciente tem agendamento? (s/n): "
+        ).lower() == "s"
+
+        documentos = input(
+            "Documentos estão em dia? (s/n): "
+        ).lower() == "s"
+
+        medico_disponivel = input(
+            "Há médico disponível? (s/n): "
+        ).lower() == "s"
+
+        pagamentos = input(
+            "Pagamentos estão em dia? (s/n): "
+        ).lower() == "s"
+
+        emergencia = input(
+            "É uma emergência? (s/n): "
+        ).lower() == "s"
+
+
+        # ======================================
+        # EMERGÊNCIA
+        # Regra: C E (B OU D)
+        # ======================================
+
+        if emergencia:
+
+            atendimento_liberado = (
+                medico_disponivel
+                and (documentos or pagamentos)
+            )
+
+            if atendimento_liberado:
+                print(
+                    "\nAtendimento LIBERADO para emergência!"
+                )
+
+            else:
+                print(
+                    "\nAtendimento NEGADO para emergência!"
+                )
+
+
+        # ======================================
+        # CONSULTA NORMAL
+        # Regra: (A E B E C) OU (B E C E D)
+        # ======================================
+
+        else:
+
+            atendimento_liberado = (
+                agendamento
+                and documentos
+                and medico_disponivel
+            ) or (
+                documentos
+                and medico_disponivel
+                and pagamentos
+            )
+
+            if atendimento_liberado:
+                print(
+                    "\nAtendimento LIBERADO para consulta normal!"
+                )
+
+            else:
+                print(
+                    "\nAtendimento NEGADO para consulta normal!"
+                )
+
+
+    # ==========================================
+    # OPÇÃO 6 - SAIR
+    # ==========================================
+
+    elif opcao == "6":
+
+        print(
+            "\nObrigado por utilizar o sistema Clínica Vida+!"
+        )
+
         print("Sistema encerrado.")
 
         break
@@ -206,6 +290,5 @@ while True:
     else:
 
         print(
-            "\nOpção inválida! "
-            "Escolha uma opção entre 1 e 5."
-        )
+            "\nOpção inválida! Escolha uma opção entre 1 e 6."
+        )           
