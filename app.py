@@ -193,28 +193,41 @@ while True:
     # ==========================================
 
     elif opcao == "5":
-
+    
         print("\n--- VERIFICAR ATENDIMENTO ---")
 
-        agendamento = input(
-            "Paciente tem agendamento? (s/n): "
-        ).lower() == "s"
+        # Solicita o nome do paciente
+        nome_busca = input("Digite o nome do paciente: ").strip()
 
-        documentos = input(
-            "Documentos estão em dia? (s/n): "
-        ).lower() == "s"
+        paciente = None
 
-        medico_disponivel = input(
-            "Há médico disponível? (s/n): "
-        ).lower() == "s"
+        # Procura o paciente na lista de cadastrados
+        for p in pacientes:
+            if p["nome"].lower() == nome_busca.lower():
+                paciente = p
+                break
+        # Verifica se o paciente foi encontrado
+        if paciente:
 
-        pagamentos = input(
-            "Pagamentos estão em dia? (s/n): "
-        ).lower() == "s"
+            emergencia = input(
+                "É uma emergência? (s/n): "
+            ).lower() == "s"
 
-        emergencia = input(
-            "É uma emergência? (s/n): "
-        ).lower() == "s"
+            agendamento = input(
+                "Paciente tem agendamento? (s/n): "
+            ).lower() == "s"
+
+            documentos = input(
+                "Documentos estão em dia? (s/n): "
+            ).lower() == "s"
+
+            medico_disponivel = input(
+                "Há médico disponível? (s/n): "
+            ).lower() == "s"
+
+            pagamentos = input(
+                "Pagamentos estão em dia? (s/n): "
+            ).lower() == "s"
 
 
         # ======================================
