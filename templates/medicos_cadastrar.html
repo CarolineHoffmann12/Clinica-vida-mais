@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Cadastrar médico{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Cadastrar médico</h1>
+        <p class="subtitulo">Preencha os dados abaixo.</p>
+    </header>
+
+    <form method="post" class="formulario">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" value="{{ valores.nome }}" autofocus>
+
+        <label for="especialidade">Especialidade</label>
+        <input type="text" id="especialidade" name="especialidade" value="{{ valores.especialidade }}" placeholder="Ex: Cardiologia">
+
+        <label for="crm">CRM</label>
+        <input type="text" id="crm" name="crm" value="{{ valores.crm }}">
+
+        <button type="submit">Cadastrar médico</button>
+    </form>
+{% endblock %}

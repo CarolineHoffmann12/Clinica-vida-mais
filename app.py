@@ -119,5 +119,78 @@ def pacientes_estatisticas():
     return render_template("pacientes_estatisticas.html", stats=stats)
 
 
+# ==========================================
+# MÉDICOS
+# ==========================================
+
+@app.route("/medicos")
+def medicos_listar():
+    termo = request.args.get("q", "").strip()
+
+    conexao = get_conexao()
+    cursor = conexao.cursor()
+
+    if termo:
+        cursor.execute(
+            "SELECT * FROM medicos WHERE LOWER(nome) LIKE LOWER(?) ORDER BY id",
+            (f"%{termo}%",)
+        )
+    else:
+        cursor.execute("SELECT * FROM medicos ORDER BY id")
+
+    medicos = cursor.fetchall()
+    conexao.close()
+
+    return render_template("medicos_listar.html", medicos=medicos, termo=termo)
+
+
+@app.route("/medicos/cadastrar", methods=["GET", "POST"])
+def medicos_cadastrar():
+    valores = {"nome": "", "especialidade": "", "crm": ""}
+
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        especialidade = request.form.get("especialidade", "").strip()
+        crm = request.form.get("crm", "").strip()
+
+        valores = {"nome": nome, "especialidade": especialidade, "crm": crm}
+
+        erro = None
+
+        if not nome:
+            erro = "O nome não pode ficar vazio."
+        elif not especialidade:
+            erro = "A especialidade não pode ficar vazia."
+        elif not crm:
+            erro = "O CRM não pode ficar vazio."
+
+        if not erro:
+            conexao = get_conexao()
+            cursor = conexao.cursor()
+
+            cursor.execute(
+                "SELECT id FROM medicos WHERE LOWER(crm) = LOWER(?)", (crm,)
+            )
+            if cursor.fetchone():
+                erro = "Já existe um médico cadastrado com esse CRM."
+            else:
+                cursor.execute(
+                    "INSERT INTO medicos (nome, especialidade, crm) VALUES (?, ?, ?)",
+                    (nome, especialidade, crm)
+                )
+                conexao.commit()
+
+            conexao.close()
+
+        if erro:
+            flash(erro, "erro")
+            return render_template("medicos_cadastrar.html", valores=valores)
+
+        flash("Médico cadastrado com sucesso!", "sucesso")
+        return redirect(url_for("medicos_listar"))
+
+    return render_template("medicos_cadastrar.html", valores=valores)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -78,7 +78,11 @@ a {
 .grupo-titulo {
     font-size: 12px;
     color: #8FB3AF;
-    margin: 0 0 8px 4px;
+    margin: 20px 0 8px 4px;
+}
+
+.grupo-titulo:first-child {
+    margin-top: 0;
 }
 
 .link-nav {

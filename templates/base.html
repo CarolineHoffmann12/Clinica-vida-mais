@@ -23,6 +23,10 @@
                 <a href="{{ url_for('pacientes_listar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_listar' }}">Listar &amp; buscar</a>
                 <a href="{{ url_for('pacientes_cadastrar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_cadastrar' }}">Cadastrar</a>
                 <a href="{{ url_for('pacientes_estatisticas') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_estatisticas' }}">Estatísticas</a>
+
+                <p class="grupo-titulo">Médicos</p>
+                <a href="{{ url_for('medicos_listar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'medicos_listar' }}">Listar &amp; buscar</a>
+                <a href="{{ url_for('medicos_cadastrar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'medicos_cadastrar' }}">Cadastrar</a>
             </nav>
         </aside>
 
