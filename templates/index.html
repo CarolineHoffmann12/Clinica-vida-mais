@@ -33,5 +33,15 @@
             <h2>Novo médico</h2>
             <p>Cadastre nome, especialidade e CRM.</p>
         </a>
+
+        <a href="{{ url_for('exames_listar') }}" class="cartao-atalho">
+            <h2>Exames cadastrados</h2>
+            <p>Veja a lista completa ou busque por nome.</p>
+        </a>
+
+        <a href="{{ url_for('exames_cadastrar') }}" class="cartao-atalho">
+            <h2>Novo exame</h2>
+            <p>Cadastre nome, tipo e valor.</p>
+        </a>
     </div>
 {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Cadastrar exame{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Cadastrar exame</h1>
+        <p class="subtitulo">Preencha os dados abaixo.</p>
+    </header>
+
+    <form method="post" class="formulario">
+        <label for="nome">Nome do exame</label>
+        <input type="text" id="nome" name="nome" value="{{ valores.nome }}" autofocus>
+
+        <label for="tipo">Tipo</label>
+        <input type="text" id="tipo" name="tipo" value="{{ valores.tipo }}" placeholder="Ex: sangue, imagem, urina">
+
+        <label for="valor">Valor (R$)</label>
+        <input type="text" id="valor" name="valor" value="{{ valores.valor }}" inputmode="decimal" placeholder="150,00">
+
+        <button type="submit">Cadastrar exame</button>
+    </form>
+{% endblock %}

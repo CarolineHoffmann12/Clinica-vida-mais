@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Exames{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Exames</h1>
+        <p class="subtitulo">{{ exames|length }} exame(s) {{ 'encontrado(s)' if termo else 'cadastrado(s)' }}</p>
+    </header>
+
+    <form method="get" class="barra-busca">
+        <input
+            type="text"
+            name="q"
+            value="{{ termo }}"
+            placeholder="Buscar exame pelo nome…"
+        >
+        <button type="submit">Buscar</button>
+        {% if termo %}
+            <a href="{{ url_for('exames_listar') }}" class="link-limpar">Limpar</a>
+        {% endif %}
+    </form>
+
+    {% if exames %}
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exame in exames %}
+                    <tr>
+                        <td>{{ exame.nome }}</td>
+                        <td>{{ exame.tipo }}</td>
+                        <td>R$ {{ "%.2f"|format(exame.valor) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="vazio">
+            {% if termo %}
+                Nenhum exame encontrado para "{{ termo }}".
+            {% else %}
+                Nenhum exame cadastrado ainda. <a href="{{ url_for('exames_cadastrar') }}">Cadastre o primeiro</a>.
+            {% endif %}
+        </p>
+    {% endif %}
+{% endblock %}

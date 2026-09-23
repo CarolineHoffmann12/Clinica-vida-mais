@@ -192,5 +192,76 @@ def medicos_cadastrar():
     return render_template("medicos_cadastrar.html", valores=valores)
 
 
+# ==========================================
+# EXAMES
+# ==========================================
+
+@app.route("/exames")
+def exames_listar():
+    termo = request.args.get("q", "").strip()
+
+    conexao = get_conexao()
+    cursor = conexao.cursor()
+
+    if termo:
+        cursor.execute(
+            "SELECT * FROM exames WHERE LOWER(nome) LIKE LOWER(?) ORDER BY id",
+            (f"%{termo}%",)
+        )
+    else:
+        cursor.execute("SELECT * FROM exames ORDER BY id")
+
+    exames = cursor.fetchall()
+    conexao.close()
+
+    return render_template("exames_listar.html", exames=exames, termo=termo)
+
+
+@app.route("/exames/cadastrar", methods=["GET", "POST"])
+def exames_cadastrar():
+    valores = {"nome": "", "tipo": "", "valor": ""}
+
+    if request.method == "POST":
+        nome = request.form.get("nome", "").strip()
+        tipo = request.form.get("tipo", "").strip()
+        valor_raw = request.form.get("valor", "").strip()
+
+        valores = {"nome": nome, "tipo": tipo, "valor": valor_raw}
+
+        erro = None
+        valor = None
+
+        if not nome:
+            erro = "O nome não pode ficar vazio."
+        elif not tipo:
+            erro = "O tipo não pode ficar vazio."
+        else:
+            try:
+                valor = float(valor_raw.replace(",", "."))
+                if valor < 0:
+                    erro = "O valor não pode ser negativo."
+            except ValueError:
+                erro = "Digite um valor válido."
+
+        if not erro:
+            conexao = get_conexao()
+            cursor = conexao.cursor()
+            cursor.execute(
+                "INSERT INTO exames (nome, tipo, valor) VALUES (?, ?, ?)",
+                (nome, tipo, valor)
+            )
+            conexao.commit()
+            conexao.close()
+
+        if erro:
+            flash(erro, "erro")
+            return render_template("exames_cadastrar.html", valores=valores)
+
+        flash("Exame cadastrado com sucesso!", "sucesso")
+        return redirect(url_for("exames_listar"))
+
+    return render_template("exames_cadastrar.html", valores=valores)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
