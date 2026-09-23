@@ -17,9 +17,7 @@ while True:
 
     opcao = input("Escolha uma opção: ")
 
-    # ==========================================
     # OPÇÃO 1 - CADASTRAR PACIENTE
-    # ==========================================
 
     if opcao == "1":
 
@@ -75,9 +73,7 @@ while True:
         print("\nPaciente cadastrado com sucesso!")
 
 
-    # ==========================================
     # OPÇÃO 2 - VER ESTATÍSTICAS
-    # ==========================================
 
     elif opcao == "2":
 
@@ -124,10 +120,8 @@ while True:
                 f"{paciente_mais_velho['idade']} anos"
             )
 
-
-    # ==========================================
     # OPÇÃO 3 - BUSCAR PACIENTE
-    # ==========================================
+
 
     elif opcao == "3":
 
@@ -163,9 +157,7 @@ while True:
                 print("Nenhum paciente encontrado.")
 
 
-    # ==========================================
     # OPÇÃO 4 - LISTAR TODOS OS PACIENTES
-    # ==========================================
 
     elif opcao == "4":
 
@@ -187,10 +179,8 @@ while True:
             print("-" * 40)
             print(f"Total: {len(pacientes)} paciente(s)")
 
-
-    # ==========================================
+  
     # OPÇÃO 5 - VERIFICAR ATENDIMENTO
-    # ==========================================
 
     elif opcao == "5":
     
@@ -228,12 +218,13 @@ while True:
             pagamentos = input(
                 "Pagamentos estão em dia? (s/n): "
             ).lower() == "s"
+        else: 
+            print("\nPaciente não encontrado. Cadastre-o antes de verificar o atendimento.")
+            continue  # volta pro menu principal sem tentar avaliar as regras)
 
-
-        # ======================================
+        
         # EMERGÊNCIA
         # Regra: C E (B OU D)
-        # ======================================
 
         if emergencia:
 
@@ -252,11 +243,9 @@ while True:
                     "\nAtendimento NEGADO para emergência!"
                 )
 
-
-        # ======================================
+ 
         # CONSULTA NORMAL
         # Regra: (A E B E C) OU (B E C E D)
-        # ======================================
 
         else:
 
@@ -281,9 +270,7 @@ while True:
                 )
 
 
-    # ==========================================
     # OPÇÃO 6 - SAIR
-    # ==========================================
 
     elif opcao == "6":
 
@@ -296,9 +283,8 @@ while True:
         break
 
 
-    # ==========================================
+  
     # OPÇÃO INVÁLIDA
-    # ==========================================
 
     else:
 
