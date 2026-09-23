@@ -52,6 +52,8 @@ a {
     display: flex;
     align-items: baseline;
     gap: 8px;
+    text-decoration: none;
+    color: inherit;
 }
 
 .marca-nome {

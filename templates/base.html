@@ -13,12 +13,14 @@
     <div class="layout">
 
         <aside class="barra-lateral">
-            <div class="marca">
+            <a href="{{ url_for('index') }}" class="marca">
                 <span class="marca-nome">Vida<span class="marca-mais">+</span></span>
                 <span class="marca-legenda">Clínica</span>
-            </div>
+            </a>
 
             <nav class="navegacao">
+                <a href="{{ url_for('index') }}" class="link-nav {{ 'ativo' if request.endpoint == 'index' }}">Início</a>
+
                 <p class="grupo-titulo">Pacientes</p>
                 <a href="{{ url_for('pacientes_listar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_listar' }}">Listar &amp; buscar</a>
                 <a href="{{ url_for('pacientes_cadastrar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_cadastrar' }}">Cadastrar</a>
