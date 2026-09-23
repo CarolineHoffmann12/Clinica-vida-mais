@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Vida+{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="layout">
+
+        <aside class="barra-lateral">
+            <div class="marca">
+                <span class="marca-nome">Vida<span class="marca-mais">+</span></span>
+                <span class="marca-legenda">Clínica</span>
+            </div>
+
+            <nav class="navegacao">
+                <p class="grupo-titulo">Pacientes</p>
+                <a href="{{ url_for('pacientes_listar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_listar' }}">Listar &amp; buscar</a>
+                <a href="{{ url_for('pacientes_cadastrar') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_cadastrar' }}">Cadastrar</a>
+                <a href="{{ url_for('pacientes_estatisticas') }}" class="link-nav {{ 'ativo' if request.endpoint == 'pacientes_estatisticas' }}">Estatísticas</a>
+            </nav>
+        </aside>
+
+        <main class="conteudo">
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+                {% if mensagens %}
+                    <div class="avisos">
+                        {% for categoria, texto in mensagens %}
+                            <p class="aviso aviso-{{ categoria }}">{{ texto }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block conteudo %}{% endblock %}
+        </main>
+
+    </div>
+
+</body>
+</html>

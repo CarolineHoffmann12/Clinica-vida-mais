@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Cadastrar paciente{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Cadastrar paciente</h1>
+        <p class="subtitulo">Preencha os dados abaixo.</p>
+    </header>
+
+    <form method="post" class="formulario">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" value="{{ valores.nome }}" autofocus>
+
+        <label for="idade">Idade</label>
+        <input type="text" id="idade" name="idade" value="{{ valores.idade }}" inputmode="numeric">
+
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone" name="telefone" value="{{ valores.telefone }}" placeholder="(11) 99999-9999">
+
+        <button type="submit">Cadastrar paciente</button>
+    </form>
+{% endblock %}

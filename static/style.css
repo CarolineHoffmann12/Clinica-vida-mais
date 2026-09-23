@@ -1,0 +1,352 @@
+:root {
+    --bg: #F5F8F7;
+    --surface: #FFFFFF;
+    --linha: #DDE6E4;
+    --ink: #1E2B2A;
+    --ink-suave: #5B6B69;
+    --primaria: #1F6F72;
+    --primaria-escura: #144F51;
+    --primaria-clara: #E4F0EF;
+    --ambar: #B87A2E;
+    --erro: #B23A3A;
+    --erro-fundo: #FBECEC;
+    --sucesso: #2F7A52;
+    --sucesso-fundo: #EAF6EF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--primaria);
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- Barra lateral ---------- */
+
+.barra-lateral {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--primaria-escura);
+    color: #EAF3F2;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.marca {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.marca-nome {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.marca-mais {
+    color: var(--ambar);
+}
+
+.marca-legenda {
+    font-size: 13px;
+    color: #A9C7C4;
+}
+
+.navegacao {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.grupo-titulo {
+    font-size: 12px;
+    color: #8FB3AF;
+    margin: 0 0 8px 4px;
+}
+
+.link-nav {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 6px;
+    color: #D6E9E7;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.link-nav:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.link-nav.ativo {
+    background: #EAF3F2;
+    color: var(--primaria-escura);
+}
+
+/* ---------- Conteúdo ---------- */
+
+.conteudo {
+    flex: 1;
+    padding: 48px 56px;
+    max-width: 900px;
+}
+
+.cabecalho-pagina {
+    margin-bottom: 32px;
+}
+
+.cabecalho-pagina h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    font-weight: 700;
+}
+
+.subtitulo {
+    color: var(--ink-suave);
+    margin: 0;
+    font-size: 15px;
+}
+
+/* ---------- Avisos ---------- */
+
+.avisos {
+    margin-bottom: 24px;
+}
+
+.aviso {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 0 0 8px;
+}
+
+.aviso-erro {
+    background: var(--erro-fundo);
+    color: var(--erro);
+}
+
+.aviso-sucesso {
+    background: var(--sucesso-fundo);
+    color: var(--sucesso);
+}
+
+/* ---------- Atalhos (home) ---------- */
+
+.atalhos {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-top: 1px solid var(--linha);
+}
+
+.cartao-atalho {
+    display: block;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--linha);
+    text-decoration: none;
+    color: var(--ink);
+}
+
+.cartao-atalho h2 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--primaria-escura);
+}
+
+.cartao-atalho p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-suave);
+}
+
+/* ---------- Busca ---------- */
+
+.barra-busca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.barra-busca input {
+    flex: 1;
+    max-width: 320px;
+    padding: 10px 12px;
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--surface);
+}
+
+.barra-busca input:focus {
+    outline: 2px solid var(--primaria);
+    outline-offset: 1px;
+}
+
+.barra-busca button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primaria);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.barra-busca button:hover {
+    background: var(--primaria-escura);
+}
+
+.link-limpar {
+    font-size: 13.5px;
+    color: var(--ink-suave);
+    text-decoration: underline;
+}
+
+/* ---------- Tabela ---------- */
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+}
+
+.tabela th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--linha);
+    color: var(--ink-suave);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.tabela td {
+    padding: 12px;
+    border-bottom: 1px solid var(--linha);
+}
+
+.tabela tr:hover td {
+    background: var(--primaria-clara);
+}
+
+.vazio {
+    color: var(--ink-suave);
+    padding: 24px 0;
+}
+
+/* ---------- Formulário ---------- */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 360px;
+}
+
+.formulario label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-suave);
+    margin-top: 12px;
+}
+
+.formulario input {
+    padding: 10px 12px;
+    border: 1px solid var(--linha);
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--surface);
+}
+
+.formulario input:focus {
+    outline: 2px solid var(--primaria);
+    outline-offset: 1px;
+}
+
+.formulario button {
+    margin-top: 24px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primaria);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.formulario button:hover {
+    background: var(--primaria-escura);
+}
+
+/* ---------- Estatísticas ---------- */
+
+.grade-estatisticas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.estatistica {
+    background: var(--surface);
+    padding: 24px;
+}
+
+.estatistica-valor {
+    margin: 0 0 4px;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primaria-escura);
+}
+
+.estatistica-rotulo {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-suave);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 720px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .barra-lateral {
+        width: auto;
+    }
+
+    .conteudo {
+        padding: 32px 24px;
+    }
+
+    .grade-estatisticas {
+        grid-template-columns: 1fr;
+    }
+}

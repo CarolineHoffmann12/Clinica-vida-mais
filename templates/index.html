@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Início{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Sistema Clínica Vida+</h1>
+        <p class="subtitulo">Cadastro de pacientes, acompanhamento e estatísticas da clínica.</p>
+    </header>
+
+    <div class="atalhos">
+        <a href="{{ url_for('pacientes_listar') }}" class="cartao-atalho">
+            <h2>Pacientes cadastrados</h2>
+            <p>Veja a lista completa ou busque por nome.</p>
+        </a>
+
+        <a href="{{ url_for('pacientes_cadastrar') }}" class="cartao-atalho">
+            <h2>Novo paciente</h2>
+            <p>Cadastre nome, idade e telefone.</p>
+        </a>
+
+        <a href="{{ url_for('pacientes_estatisticas') }}" class="cartao-atalho">
+            <h2>Estatísticas</h2>
+            <p>Total, idade média, paciente mais novo e mais velho.</p>
+        </a>
+    </div>
+{% endblock %}

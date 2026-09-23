@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Estatísticas{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Estatísticas</h1>
+        <p class="subtitulo">Panorama geral dos pacientes cadastrados.</p>
+    </header>
+
+    {% if stats %}
+        <div class="grade-estatisticas">
+            <div class="estatistica">
+                <p class="estatistica-valor">{{ stats.total }}</p>
+                <p class="estatistica-rotulo">Total de pacientes</p>
+            </div>
+
+            <div class="estatistica">
+                <p class="estatistica-valor">{{ "%.1f"|format(stats.media) }}</p>
+                <p class="estatistica-rotulo">Idade média (anos)</p>
+            </div>
+
+            <div class="estatistica">
+                <p class="estatistica-valor">{{ stats.mais_novo.nome }}</p>
+                <p class="estatistica-rotulo">Mais novo · {{ stats.mais_novo.idade }} anos</p>
+            </div>
+
+            <div class="estatistica">
+                <p class="estatistica-valor">{{ stats.mais_velho.nome }}</p>
+                <p class="estatistica-rotulo">Mais velho · {{ stats.mais_velho.idade }} anos</p>
+            </div>
+        </div>
+    {% else %}
+        <p class="vazio">
+            Nenhum paciente cadastrado ainda. <a href="{{ url_for('pacientes_cadastrar') }}">Cadastre o primeiro</a>.
+        </p>
+    {% endif %}
+{% endblock %}

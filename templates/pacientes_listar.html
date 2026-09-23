@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vida+ · Pacientes{% endblock %}
+
+{% block conteudo %}
+    <header class="cabecalho-pagina">
+        <h1>Pacientes</h1>
+        <p class="subtitulo">{{ pacientes|length }} paciente(s) {{ 'encontrado(s)' if termo else 'cadastrado(s)' }}</p>
+    </header>
+
+    <form method="get" class="barra-busca">
+        <input
+            type="text"
+            name="q"
+            value="{{ termo }}"
+            placeholder="Buscar paciente pelo nome…"
+        >
+        <button type="submit">Buscar</button>
+        {% if termo %}
+            <a href="{{ url_for('pacientes_listar') }}" class="link-limpar">Limpar</a>
+        {% endif %}
+    </form>
+
+    {% if pacientes %}
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paciente in pacientes %}
+                    <tr>
+                        <td>{{ paciente.nome }}</td>
+                        <td>{{ paciente.idade }} anos</td>
+                        <td>{{ paciente.telefone }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="vazio">
+            {% if termo %}
+                Nenhum paciente encontrado para "{{ termo }}".
+            {% else %}
+                Nenhum paciente cadastrado ainda. <a href="{{ url_for('pacientes_cadastrar') }}">Cadastre o primeiro</a>.
+            {% endif %}
+        </p>
+    {% endif %}
+{% endblock %}
